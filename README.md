@@ -3,7 +3,7 @@
 A simple implementation of JWT authentication with three routes:
 
 1. **POST `/signup`** - Register a user. Accepts two parameters: `email` and `password`.
-2. **POST `/login`** - Log in a user. Accepts two parameters: `email` and `password`.
+2. **POST `/login`** - Log in a user. Accepts two parameters: `email` and `password`. The token is saved in cookies
 3. **GET `/validate`** - Validate the user who makes the request.
 
 ## Usage
@@ -46,7 +46,7 @@ DB="host=host-of-your-db user=username password=password dbname=db-name port=543
 **Response:**
 ```json
 {
-    "message": "Signup successful"
+    "message": "Successfully signed up"
 }
 ```
 
@@ -64,10 +64,10 @@ DB="host=host-of-your-db user=username password=password dbname=db-name port=543
 **Response:**
 ```json
 {
-    "message": "Login successful",
-    "token": "your_jwt_token"
+    "message": "Successfully logged in"
 }
 ```
+*The token is saved in cookies*
 
 ### Validate User
 **GET `/validate`**
@@ -81,7 +81,14 @@ Authorization: Bearer your_jwt_token
 Response:
 ```json
 {
-    "message": "User validated"
+    "message": {
+        "ID": {id},
+        "CreatedAt": {creation date},
+        "UpdatedAt": {update date},
+        "DeletedAt": {delete date},
+        "Email": {email},
+        "Password": {password}
+    }
 }
 ```
 
